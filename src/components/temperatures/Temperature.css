@@ -1,0 +1,8 @@
+.temperature {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.temperature .low {
+    color: grey;
+}
