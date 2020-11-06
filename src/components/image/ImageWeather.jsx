@@ -8,7 +8,7 @@ class ImageWeather extends React.Component {
 
     render() {
         return (
-            <image src={this.props.image} alt="image-weather"></image>
+            <img src={this.props.image} alt="image-weather"></img>
         );
     }
 }

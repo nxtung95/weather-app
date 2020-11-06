@@ -8,9 +8,15 @@ class Temperature extends React.Component {
 
     render() {
         return (
-            <div className="tempareture">
-                <div className="tempareture-high">{this.props.tempareture.high}</div>
-                <div className="tempareture-low">{this.props.tempareture.low}</div>
+            <div className="temperature">
+                <div className="high">
+                    {this.props.temperature.high}
+                    <span>c</span>
+                </div>
+                <div className="low">
+                    {this.props.temperature.low}
+                    <span>c</span>
+                </div>
             </div>
         );
     }
