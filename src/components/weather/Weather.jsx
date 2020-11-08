@@ -1,23 +1,24 @@
 import React from 'react';
 import './Weather.css';
-import Day from '../day/Day.jsx';
-import ImageWeather from '../image/ImageWeather.jsx';
-import Temperature from '../temperatures/Temperature.jsx';
+import Day from '../day/Day';
+import ImageWeather from '../image/ImageWeather';
+import Temperature from '../temperatures/Temperature';
+import WeatherModal from "../modal/WeatherModal";
+import UseModal from '../modal/UseModal';
 
-class Weather extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <div className="weather">
-                <Day day={this.props.day}/>
-                <ImageWeather image={this.props.image} />
-                <Temperature temperature={this.props.temperature} />
-            </div>
-        );
-    }
+const weather = (props) => {
+    const { isShowing, toggle } = UseModal();
+    return (
+        <div className="weather" onClick={toggle}>
+            <Day day={props.day} />
+            <ImageWeather image={props.image} />
+            <Temperature temperature={props.temperature} />
+            <WeatherModal
+                isShowing={isShowing}
+                hide={toggle}
+            />
+        </div>
+    );
 }
 
-export default Weather;
+export default weather;

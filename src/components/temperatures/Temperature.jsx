@@ -2,10 +2,6 @@ import React from 'react';
 import './Temperature.css';
 
 class Temperature extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div className="temperature">

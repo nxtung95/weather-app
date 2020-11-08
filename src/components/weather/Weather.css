@@ -8,3 +8,7 @@
     flex-direction: column;
     align-items: center;
 }
+
+.weather:hover {
+    background-color: #ddd;
+}
