@@ -3,22 +3,53 @@ import './Weather.css';
 import Day from '../day/Day';
 import ImageWeather from '../image/ImageWeather';
 import Temperature from '../temperatures/Temperature';
-import WeatherModal from "../modal/WeatherModal";
-import UseModal from '../modal/UseModal';
+// import WeatherModal from "../modal/WeatherModal";
+// import UseModal from '../modal/UseModal';
 
-const weather = (props) => {
-    const { isShowing, toggle } = UseModal();
-    return (
-        <div className="weather" onClick={toggle}>
-            <Day day={props.day} />
-            <ImageWeather image={props.image} />
-            <Temperature temperature={props.temperature} />
-            <WeatherModal
-                isShowing={isShowing}
-                hide={toggle}
-            />
-        </div>
-    );
+class Weather extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = { showWeather: false };
+    }
+
+    handleClick = () => {
+        this.props.callBack();
+
+        this.setState({
+            showWeather: true,
+        })
+    }
+
+    render() {
+        return (
+            <React.Fragment>
+                {
+                    !this.state.showWeather && (
+                        <div className="weather" onClick={this.handleClick}>
+                            <Day day={this.props.day} />
+                            <ImageWeather image={this.props.image} />
+                            <Temperature temperature={this.props.temperature} />
+                        </div>
+                    )
+                }
+            </React.Fragment>
+        );
+    }
 }
+// const weather = (props) => {
+//     // const { isShowing, toggle } = UseModal();
+//     return (
+//         <div className="weather" onClick={ }>
+//             <Day day={props.day} />
+//             <ImageWeather image={props.image} />
+//             <Temperature temperature={props.temperature} />
+//             {/* <WeatherModal
+//                 isShowing={isShowing}
+//                 hide={toggle}
+//             /> */}
+//         </div>
+//     );
+// }
 
-export default weather;
+export default Weather;

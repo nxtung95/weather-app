@@ -8,24 +8,41 @@ import './index.css';
 
 class WeatherApp extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
+        this.state = ({ hideContainer: false });
+    }
+
+    hideWeather = () => {
+        this.setState({ hideContainer: true });
     }
 
     render() {
         const weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        const typeWeather = { 1: Sunny, 2: Cloudy, 3: Rainy, 4: Snowy };
         const temperature = { low: 45, high: 66 };
         const date = new Date();
         return (
-            <div className='container'>
+            < React.Fragment>
                 {
-                    weekday.map((index) => {
-                        date.setDate(date.getDate() + 1);
-                        let day = date.getDay();
-                        return <Weather day={weekday[day]} image={Cloudy} temperature={temperature} key={index} />
-                    })
+                    this.state.hideContainer ? <div>abcd</div> :
+                        (
+                            <div className='container'>
+                                {
+                                    weekday.map((index) => {
+                                        date.setDate(date.getDate() + 1);
+                                        let day = date.getDay();
+                                        return <Weather
+                                            day={weekday[day]}
+                                            image={Cloudy}
+                                            temperature={temperature}
+                                            key={index}
+                                            callBack={this.hideWeather}
+                                        />
+                                    })
+                                }
+                            </div>
+                        )
                 }
-            </div>
+            </ React.Fragment>
         );
     }
 }

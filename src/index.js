@@ -13,6 +13,27 @@ const App = () => {
   return (
     <Router>
       <Switch>
+        <Route path="/Sunday">
+          <WeatherApp day={date.getDay()} />
+        </Route>
+        <Route path="/Monday">
+          <WeatherApp day={date.getDay()} />
+        </Route>
+        <Route path="/Tuesday">
+          <WeatherApp day={date.getDay()} />
+        </Route>
+        <Route path="/Wednesday">
+          <WeatherApp day={date.getDay()} />
+        </Route>
+        <Route path="/Thursday">
+          <WeatherApp day={date.getDay()} />
+        </Route>
+        <Route path="/Friday">
+          <WeatherApp day={date.getDay()} />
+        </Route>
+        <Route path="/Saturday">
+          <WeatherApp day={date.getDay()} />
+        </Route>
         <Route path="/">
           <WeatherApp day={date.getDay()} />
         </Route>
