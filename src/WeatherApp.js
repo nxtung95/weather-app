@@ -9,11 +9,6 @@ import './index.css';
 class WeatherApp extends React.Component {
     constructor(props) {
         super(props);
-        this.state = ({ hideContainer: false });
-    }
-
-    hideWeather = () => {
-        this.setState({ hideContainer: true });
     }
 
     render() {
@@ -21,28 +16,21 @@ class WeatherApp extends React.Component {
         const temperature = { low: 45, high: 66 };
         const date = new Date();
         return (
-            < React.Fragment>
+            <div className='container'>
                 {
-                    this.state.hideContainer ? <div>abcd</div> :
-                        (
-                            <div className='container'>
-                                {
-                                    weekday.map((index) => {
-                                        date.setDate(date.getDate() + 1);
-                                        let day = date.getDay();
-                                        return <Weather
-                                            day={weekday[day]}
-                                            image={Cloudy}
-                                            temperature={temperature}
-                                            key={index}
-                                            callBack={this.hideWeather}
-                                        />
-                                    })
-                                }
-                            </div>
-                        )
+                    weekday.map((index) => {
+                        date.setDate(date.getDate() + 1);
+                        let day = date.getDay();
+                        return <Weather
+                            day={weekday[day]}
+                            image={Cloudy}
+                            temperature={temperature}
+                            key={index}
+                            callBack={this.hideWeather}
+                        />
+                    })
                 }
-            </ React.Fragment>
+            </div>
         );
     }
 }

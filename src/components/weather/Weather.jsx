@@ -9,31 +9,19 @@ import Temperature from '../temperatures/Temperature';
 class Weather extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = { showWeather: false };
     }
 
     handleClick = () => {
-        this.props.callBack();
-
-        this.setState({
-            showWeather: true,
-        })
+        window.location.href = `/${this.props.day}`;
     }
 
     render() {
         return (
-            <React.Fragment>
-                {
-                    !this.state.showWeather && (
-                        <div className="weather" onClick={this.handleClick}>
-                            <Day day={this.props.day} />
-                            <ImageWeather image={this.props.image} />
-                            <Temperature temperature={this.props.temperature} />
-                        </div>
-                    )
-                }
-            </React.Fragment>
+            <div className="weather" onClick={this.handleClick}>
+                <Day day={this.props.day} />
+                <ImageWeather image={this.props.image} />
+                <Temperature temperature={this.props.temperature} />
+            </div>
         );
     }
 }
