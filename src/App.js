@@ -20,24 +20,26 @@ class App extends React.Component {
         };
     }
 
-    componentDidMount() {
-        ApiWeather().then(res => {
-            console.log(res);
+    async componentDidMount() {
+        await Promise.all([
+            ApiWeather.getDailyWeather(),
+            ApiWeather.getHourlyWeather()
+        ]).then(result => {
             this.setState({
-                weatherDaily: res.data.daily,
-                weatherHourly: res.data.hourly,
+                weatherDaily: result[0].data.daily,
+                weatherHourly: result[1].data.list
             });
         }).catch(err => {
             console.log(err);
-        });
+        })
     }
 
     render() {
         return (
             <Router>
                 <Switch>
-                    <Route path="/:day" component={WeatherDetail} />
-                    <Route exact path="/" component={WeatherApp} />
+                    <Route exact path="/:day" component={WeatherDetail} />
+                    <Route exact path="/" render={props => <WeatherApp {...props} daily={this.state.weatherDaily} hourly={this.state.weatherHourly} />} />
                 </Switch>
             </Router>
         );

@@ -1,10 +1,7 @@
 import React from 'react';
 import Weather from './components/weather/Weather';
-import Sunny from './components/image/sunny.PNG';
-import Cloudy from './components/image/cloudy.PNG';
-import Rainy from './components/image/rainy.PNG';
-import Snowy from './components/image/snowy.PNG';
 import './index.css';
+import WeatherAppUtil from './utils/WeatherAppUtil';
 
 class WeatherApp extends React.Component {
     constructor(props) {
@@ -13,20 +10,22 @@ class WeatherApp extends React.Component {
 
     render() {
         const weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        const temperature = { low: 45, high: 66 };
-        const date = new Date();
+        const daily = this.props.daily;
+        const hourly = this.props.hourly;
         return (
             <div className='container'>
                 {
-                    weekday.map((index) => {
-                        date.setDate(date.getDate() + 1);
-                        let day = date.getDay();
+                    daily.map((value, index) => {
+                        let date = new Date(value.dt * 1000);
+                        let image = WeatherAppUtil.getImageWeather(value.weather[0].main);
+                        let hourOneDay = WeatherAppUtil.getHourForOneDay(hourly, date);
+                        let temp = { low: parseInt(value.temp.min), high: parseInt(value.temp.max) };
                         return <Weather
-                            day={weekday[day]}
-                            image={Cloudy}
-                            temperature={temperature}
+                            day={weekday[date.getDay()]}
+                            image={image}
+                            temperature={temp}
                             key={index}
-                            callBack={this.hideWeather}
+                            hourOneDay={hourOneDay}
                         />
                     })
                 }
